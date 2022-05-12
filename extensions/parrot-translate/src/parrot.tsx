@@ -95,18 +95,24 @@ export default function () {
 
     function ListDetail() {
         if (fetchResultStateCode === "-1") return null
-
+        const sectionInfoMap = {
+            [0 as number]: { sectionTitle: "Translate", dotColor: Color.Red },
+            [1 as number]: { sectionTitle: "Detail", dotColor: Color.Blue },
+            [2 as number]: { sectionTitle: "Web Translate", dotColor: Color.Yellow },
+            [3 as number]: { sectionTitle: "Other Results", dotColor: Color.PrimaryText },
+        }
         if (fetchResultStateCode === "0") {
             return (
                 <Fragment>
                     {translateResultState?.map((result, idx) => {
+                        idx = idx >= 3 ? 3 : idx
                         return (
-                            <List.Section key={idx} title={result.type}>
+                            <List.Section key={idx} title={sectionInfoMap[idx].sectionTitle}>
                                 {result.children?.map((item) => {
                                     return (
                                         <List.Item
                                             key={item.key}
-                                            icon={Icon.Text}
+                                            icon={{source: Icon.Dot, tintColor: sectionInfoMap[idx].dotColor}}
                                             title={item.title}
                                             subtitle={item?.subtitle}
                                             accessoryTitle={item.phonetic}
