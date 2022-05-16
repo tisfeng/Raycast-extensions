@@ -4,6 +4,7 @@ import { COPY_TYPE, LANGUAGE_LIST } from "./consts"
 import { reformatCopyTextArray, truncate } from "./shared.func"
 import { IActionCopyListSection, IListItemActionPanelItem, IPreferences } from "./types"
 import { Action, ActionPanel, Clipboard, getPreferenceValues, Icon, Keyboard } from "@raycast/api"
+import childProcess from 'child_process'
 
 const preferences: IPreferences = getPreferenceValues()
 
@@ -112,6 +113,22 @@ export class ListActionPanel extends Component<IListItemActionPanelItem> {
                         }
                     />
                 </ActionPanel.Section>
+
+                <ActionPanel.Section title="Open in">
+                    <Action 
+                    title="Search Query Text in Eudic" icon={Icon.Message}
+                    onAction={() => 
+                        childProcess.execSync('bash /Users/tisfeng/Documents/Code/Raycast-extensions/extensions/parrot-translate/src/open-in-eudic.sh ' + this.props.queryText)
+                    }
+                    />
+                     <Action 
+                    title="Search Result Text in Eudic" icon={Icon.Message}
+                    onAction={() => 
+                        childProcess.execSync('bash /Users/tisfeng/Documents/Code/Raycast-extensions/extensions/parrot-translate/src/open-in-eudic.sh ' + this.props.copyText)
+                    }
+                    />
+                </ActionPanel.Section>
+
                 <ActionPanel.Section title="Target Language">
                     {LANGUAGE_LIST.map((region) => {
                         const isCurrentFromLanguage = this.props.currentFromLanguage?.languageId === region.languageId
