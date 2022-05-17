@@ -98,8 +98,8 @@ export default function () {
         const sectionInfoMap = {
             [0 as number]: { sectionTitle: "Translate", dotColor: Color.Red },
             [1 as number]: { sectionTitle: "Detail", dotColor: Color.Blue },
-            [2 as number]: { sectionTitle: "Web Translate", dotColor: Color.Yellow },
-            [3 as number]: { sectionTitle: "Other Results", dotColor: Color.PrimaryText },
+            [2 as number]: { sectionTitle: undefined, dotColor: Color.Yellow },
+            [3 as number]: { sectionTitle: undefined, dotColor: Color.PrimaryText },
         }
         if (fetchResultStateCode === "0") {
             return (
